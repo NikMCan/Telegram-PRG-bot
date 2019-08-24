@@ -856,7 +856,7 @@ newmessage(1,text,key,fromId,messageId);
 
 function aut(id){ //модуль авторизации телеграм ID и строка в таблице. Не красиво, зато очень быстро.
   switch (id){ 
-    case 398857149:  rowMembers = 133; break;//Сизов Николай Игоревич
+    case 33333333:  rowMembers = 133; break;//Сизов Николай Игоревич
 
     //default: sendmes(1,'Вы не зарегистрированы, обратитесь к администратору.',{remove_keyboard: true},fromId);
       
