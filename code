@@ -236,16 +236,16 @@ function  doPost(e) {
     
   if(cbText.slice(0,1) == 'n') answercb('Только просмотр.',cbId); //Весь район
   if(cbText.slice(0,1) == 'z'){ //зарплатное меню
-    if(cbText.slice(1,2) == '1') {delmes(fromId,messageId); zp(2+1*cbText.slice(2,cbText.indexOf(' ')),1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2),0);}  //столбцы будни выходные и коэффициент    
+    if(cbText.slice(1,2) == '1') {delmes(fromId,messageId); zp(3+1*cbText.slice(2,cbText.indexOf(' ')),1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2),0);}  //столбцы будни выходные и коэффициент    
     if(cbText.slice(1,2) == '2'){ //клавиатура      
-      sheetUIK.getRange(1*cbText.slice(3,cbText.indexOf(' '))-2,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).setValue(sheetUIK.getRange(1*cbText.slice(3,cbText.indexOf(' '))-2,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).getValue()*1+cbText.slice(2,3));   
+      sheetUIK.getRange(1*cbText.slice(3,cbText.indexOf(' '))-3,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).setValue(sheetUIK.getRange(1*cbText.slice(3,cbText.indexOf(' '))-3,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).getValue()*1+cbText.slice(2,3));   
       //delmes(fromId,messageId);
       //zp(1*cbText.slice(3,cbText.indexOf(' ')),1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2),0);
     }
     if(cbText.slice(1,2) == '3') answercb( sheetUIK.getRange(1*cbText.slice(2),3).getValue() + ' УИК №' + sheetUIK.getRange(1*cbText.slice(2),8).getValue() + '\n' + sheetUIK.getRange(1*cbText.slice(2),2).getValue() + '\n\n' + sheetUIK.getRange(1*cbText.slice(2),4).getValue(),cbId); //столбец фамилий
     
     if(cbText.slice(1,2) == '4') { //кнопка стереть в клавиатуре
-      sheetUIK.getRange(1*cbText.slice(2,cbText.indexOf(' '))-2,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).setValue(0);
+      sheetUIK.getRange(1*cbText.slice(2,cbText.indexOf(' '))-3,20+1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2)).setValue(0);
       //delmes(fromId,messageId);
       //zp(1*cbText.slice(2,cbText.indexOf(' ')),1*cbText.slice(cbText.indexOf(' ')+1,cbText.indexOf(' ')+2),0);
     }
@@ -613,7 +613,7 @@ function zp(zpr,zpc, zps){ //зарплата, переменные - указы
     if(rBut.length==zpr+2-rowUIKzp1){ //добавляем клавиатуру ввода, если надо
       if(zpc==3) var col = 4;
         else var col = zpc;
-      rBut[rBut.length-1][zpc]={text:'✏' + sheetUIK.getRange(zpr-2,20+col).getValue(),callback_data:'z1'+rowUIKzp+' '+zpc};
+      rBut[rBut.length-1][zpc]={text:'✏' + sheetUIK.getRange(zpr-3,20+col).getValue(),callback_data:'z1'+rowUIKzp+' '+zpc};
       rBut.push([{text:'1⃣',callback_data:'z21'+zpr+' '+zpc},{text:'2⃣',callback_data:'z22'+zpr+' '+zpc},{text:'3⃣',callback_data:'z23'+zpr+' '+zpc},{text:'❎',callback_data:'z4'+zpr+' '+zpc}]);
       rBut.push([{text:'4⃣',callback_data:'z24'+zpr+' '+zpc},{text:'5⃣',callback_data:'z25'+zpr+' '+zpc},{text:'6⃣',callback_data:'z26'+zpr+' '+zpc},{text:'0⃣',callback_data:'z20'+zpr+' '+zpc}]);
       rBut.push([{text:'7⃣',callback_data:'z27'+zpr+' '+zpc},{text:'8⃣',callback_data:'z28'+zpr+' '+zpc},{text:'9⃣',callback_data:'z29'+zpr+' '+zpc},{text:'✅',callback_data:'z5'+zpr+' '+zpc}]); 
