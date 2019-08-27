@@ -3,6 +3,8 @@
 
 var API_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 var ss = SpreadsheetApp.openById("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+var u = [9,69,137]; //здесь задаем номера строк - начал блоков и конец+1
+
 var sheetLog = ss.getSheetByName('Лог');
 var sheetMembers = ss.getSheetByName('Члены19');
 var sheetLogError = ss.getSheetByName("ЛогЧужие");
@@ -43,9 +45,9 @@ var rowBlock = [];
 var botUpdate = 0;
 var formattedTime = Date.now()/86400000 + 25569 + 3/24;//dateTime.toISOString();
 var msTime = Date.now();
-var key5,key9,key16,key17,key18,key19,key20,key21,key22,key23,key24,key25,key26,key27,key28;
-var text5,text16,text17,text18,text19,text20,text21,text22,text23,text24,text25,text26,text27,text28;
-var u = [9,69,137]; //здесь задаем номера строк - начал блоков и конец+1
+var key5,key9,key16,key163,key17,key18,key19,key20,key21,key22,key23,key24,key25,key26,key27,key28;
+var text5,text16,text169,text17,text18,text19,text20,text21,text22,text23,text24,text25,text26,text27,text28;
+
 var update = '';
 
 function  doPost(e) { 
@@ -180,23 +182,22 @@ function  doPost(e) {
   }
   
   if(cbText.slice(0,1) == '3'){ //Районы товарищи
-    rn(3,-1);
     switch (cbText){
-      case '3Районы - товарищи1': newmessage(1,text16,key16,fromId,messageId); break;
+      case '3Районы - товарищи1': rn(3,0); newmessage(1,text16,key16,fromId,messageId); break;
       case '3Назад': newmessage(1,text1,key1,fromId,messageId); break;
-      case '31Назад': newmessage(1,text16,key16,fromId,messageId); break;
-      case '3СЗАО': newmessage(1,text17,key17,fromId,messageId); break;
-      case '3САО': newmessage(1,text18,key18,fromId,messageId); break;
-      case '3СВАО': newmessage(1,text19,key19,fromId,messageId); break;
-      case '3ЗАО': newmessage(1,text20,key20,fromId,messageId); break;
-      case '3ЦАО': newmessage(1,text21,key21,fromId,messageId); break;
-      case '3ВАО': newmessage(1,text22,key22,fromId,messageId); break;
-      case '3ЮЗАО': newmessage(1,text23,key23,fromId,messageId); break;
-      case '3ЮАО': newmessage(1,text24,key24,fromId,messageId); break;
-      case '3ЮВАО': newmessage(1,text25,key25,fromId,messageId); break;
-      case '3ЗелАО': newmessage(1,text26,key26,fromId,messageId); break;
-      case '3НАО': newmessage(1,text27,key27,fromId,messageId); break;
-      case '3ТАО': newmessage(1,text28,key28,fromId,messageId); break;
+      case '31Назад': rn(3,0); newmessage(1,text16,key16,fromId,messageId); break;
+      case '3СЗАО': rn(3,1); newmessage(1,text17,key163,fromId,messageId); break;
+      case '3САО': rn(3,2); newmessage(1,text18,key163,fromId,messageId); break;
+      case '3СВАО': rn(3,3); newmessage(1,text19,key163,fromId,messageId); break;
+      case '3ЗАО': rn(3,4); newmessage(1,text20,key163,fromId,messageId); break;
+      case '3ЦАО': rn(3,5); newmessage(1,text21,key163,fromId,messageId); break;
+      case '3ВАО': rn(3,6); newmessage(1,text22,key163,fromId,messageId); break;
+      case '3ЮЗАО': rn(3,7); newmessage(1,text23,key163,fromId,messageId); break;
+      case '3ЮАО': rn(3,8); newmessage(1,text24,key163,fromId,messageId); break;
+      case '3ЮВАО': rn(3,9); newmessage(1,text25,key163,fromId,messageId); break;
+      case '3ЗелАО': rn(3,10); newmessage(1,text26,key163,fromId,messageId); break;
+      case '3НАО': rn(3,11); newmessage(1,text27,key163,fromId,messageId); break;
+      case '3ТАО': rn(3,12); newmessage(1,text28,key163,fromId,messageId); break;
     }
   }
   
@@ -637,15 +638,28 @@ function rn(ms,nr){ //единый модуль для краудфандига,
   var os =['','','','','','','','','','','','','','','','','','',''];
   var ts =['','','','','','','','','','','',''];         
   var gs = [2,10,26,43,56,66,82,94,110,122,127,129]; //номера первых строк округов на втором листе таблицы с платежами 
-  if(ms==5){
-  if(nr==0) {for(var i=0; i<gs.length; i++) os[i]=' '+sheetDon2.getRange(gs[i],11).getValue();}
-  else if(nr>0) for(var i=0; i<20; i++) {
-    os[i]=' '+sheetDon2.getRange(gs[nr-1]+i,10).getValue(); //медали районов
-    ts[i]='\n🎖 >200р/к\n🥇 >100р/к\n🥈 >50р/к\n🥉 >25р/к\nСобрано '+sheetDon2.getRange(gs[nr-1],5).getValue() + 'р на ' + sheetDon2.getRange(gs[nr-1]+i,7).getValue() + ' комиссий'; //суммы на округ
-  }}
+  //if(ms==5){ //Поддержать
+  //if(nr==0) {for(var i=0; i<gs.length; i++) os[i]=' '+sheetDon2.getRange(gs[i],11).getValue();}
+  //else if(nr>0) for(var i=0; i<20; i++) {
+  //  os[i]=' '+sheetDon2.getRange(gs[nr-1]+i,10).getValue(); //медали районов
+  //  ts[i]='\n🎖 >200р/к\n🥇 >100р/к\n🥈 >50р/к\n🥉 >25р/к\nСобрано '+sheetDon2.getRange(gs[nr-1],5).getValue() + 'р на ' + sheetDon2.getRange(gs[nr-1]+i,7).getValue() + ' комиссий'; //суммы на округ
+  //}}
+  if(ms==3){ //Районы Товарищи
+  if(nr==0) {for(var i=0; i<gs.length; i++) ts[i]=sheetTov.getRange(i+2,11).getValue();}
+    else if(nr>0){
+      var rowStart = sheetTov.getRange(nr+1,12).getValue();  var rowEnd = sheetTov.getRange(nr+1,13).getValue(); var tBut=[]; var trig=0;
+      for(var i=0; i<rowEnd; i++) {
+        if(trig==0) {tBut.push([{text:sheetTov.getRange(rowStart+i,18).getValue(),url:'https://t.me/' + sheetTov.getRange(rowStart+i,17).getValue()}]); trig=1;}
+          else {tBut[tBut.length-1].push({text:sheetTov.getRange(rowStart+i,18).getValue(),url:'https://t.me/' + sheetTov.getRange(rowStart+i,17).getValue()}); trig=0;}
+      }
+      if(trig==0) tBut.push([{text:'⬅ Назад',callback_data:ms+'1Назад'}]);
+        else tBut[tBut.length-1].push({text:'⬅ Назад',callback_data:ms+'1Назад'});
+      key163 = {inline_keyboard:tBut};
+    }}
   
-  text5 = 'Коллеги, понятно, что не все в этой жизни можно сделать бесплатно. И в этом разделе мы предлагаем вашему вниманию, очень достойный, но затратный проект в области контроля выборов.\nСобрано ' + sheetDon1.getRange(1,7).getValue() + 'р на 3519 комиссий';
-  text16 = "набросок";
+  //text5 = 'Коллеги, понятно, что не все в этой жизни можно сделать бесплатно. И в этом разделе мы предлагаем вашему вниманию, очень достойный, но затратный проект в области контроля выборов.\nСобрано ' + sheetDon1.getRange(1,7).getValue() + 'р на 3519 комиссий';
+  text16 = "Округа Москвы. Значком 🍻 отмечены округа, в которых есть районы, также развернувшие личный кабинет члена комиссии.";
+  text169 = 'Округа Москвы.';
   text17 = "Северо-Западный АО Москвы"+ts[0];
   text18 = "Северный АО Москвы"+ts[1];
   text19 = "Северо-Восточный АО Москвы"+ts[2];
@@ -660,7 +674,7 @@ function rn(ms,nr){ //единый модуль для краудфандига,
   text28 = "Троицкий АО Москвы"+ts[11];
   
   key9 = {inline_keyboard:[[{text:'💳 Поддержать',url:'https://schitaytesami.live/#/donate'}],[{text:'СЗАО',callback_data:ms+'СЗАО'},{text:'САО',callback_data:ms+'САО'},{text:'СВАО',callback_data:ms+'СВАО'}],[{text:'ЗАО',callback_data:ms+'ЗАО'},{text:'ЦАО',callback_data:ms+'ЦАО'},{text:'ВАО',callback_data:ms+'ВАО'}],[{text:'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:'ЮАО',callback_data:ms+'ЮАО'},{text:'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:'ЗелАО',callback_data:ms+'ЗелАО'},{text:'НАО',callback_data:ms+'НАО'},{text:'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
-  key16 = {inline_keyboard:[[{text:'СЗАО',callback_data:ms+'СЗАО'},{text:'САО',callback_data:ms+'САО'},{text:'СВАО',callback_data:ms+'СВАО'}],[{text:'ЗАО',callback_data:ms+'ЗАО'},{text:'ЦАО',callback_data:ms+'ЦАО'},{text:'ВАО',callback_data:ms+'ВАО'}],[{text:'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:'ЮАО',callback_data:ms+'ЮАО'},{text:'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:'ЗелАО',callback_data:ms+'ЗелАО'},{text:'НАО',callback_data:ms+'НАО'},{text:'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
+  key16 = {inline_keyboard:[[{text:ts[0]+'СЗАО',callback_data:ms+'СЗАО'},{text:ts[1]+'САО',callback_data:ms+'САО'},{text:ts[2]+'СВАО',callback_data:ms+'СВАО'}],[{text:ts[3]+'ЗАО',callback_data:ms+'ЗАО'},{text:ts[4]+'ЦАО',callback_data:ms+'ЦАО'},{text:ts[5]+'ВАО',callback_data:ms+'ВАО'}],[{text:ts[6]+'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:ts[7]+'ЮАО',callback_data:ms+'ЮАО'},{text:ts[8]+'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:ts[9]+'ЗелАО',callback_data:ms+'ЗелАО'},{text:ts[10]+'НАО',callback_data:ms+'НАО'},{text:ts[11]+'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
   key5 = {inline_keyboard:[[{text:'📝 Info',url:'https://telegra.ph/Muzyka-08-15'},{text:'🔮 "Видео 2018"',url:'https://schitaytesami.live/#/donate'}],[{text:os[0]+'СЗАО',callback_data:ms+'СЗАО'},{text:os[1]+'САО',callback_data:ms+'САО'},{text:os[2]+'СВАО',callback_data:ms+'СВАО'}],[{text:os[3]+'ЗАО',callback_data:ms+'ЗАО'},{text:os[4]+'ЦАО',callback_data:ms+'ЦАО'},{text:os[5]+'ВАО',callback_data:ms+'ВАО'}],[{text:os[6]+'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:os[7]+'ЮАО',callback_data:ms+'ЮАО'},{text:os[8]+'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:os[9]+'ЗелАО',callback_data:ms+'ЗелАО'},{text:os[10]+'НАО',callback_data:ms+'НАО'},{text:os[11]+'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
   key17 = {inline_keyboard:[[{text:os[0]+'Куркино',callback_data:ms+'2КуркиноS'+nr},{text:os[1]+'Митино',callback_data:ms+'2МитиноS'+nr}],[{text:os[2]+'Покровское-Стрешнево',callback_data:ms+'2Покровское-СтрешневоS'+nr},{text:os[3]+'Северное Тушино',callback_data:ms+'2Северное ТушиноS'+nr}],[{text:os[4]+'Строгино',callback_data:ms+'2СтрогиноS'+nr},{text:os[5]+'Хорошёво-Мнёвники',callback_data:ms+'2Хорошёво-МнёвникиS'+nr}],[{text:os[6]+'Щукино',callback_data:ms+'2ЩукиноS'+nr},{text:os[7]+'Южное Тушино',callback_data:ms+'2Южное ТушиноS'+nr}],[{text:'⬅ Назад',callback_data:ms+'1Назад'}]]};
   key18 = {inline_keyboard:[[{text:os[0]+'Аэропорт',callback_data:ms+'2АэропортS'+nr},{text:os[1]+'Беговой',callback_data:ms+'2БеговойS'+nr}],[{text:os[2]+'Бескудниковский',callback_data:ms+'2БескудниковскийS'+nr},{text:os[3]+'Войковский',callback_data:ms+'2ВойковскийS'+nr}],[{text:os[4]+'Восточное Дегунино',callback_data:ms+'2Восточное ДегуниноS'+nr},{text:os[5]+'Головинский',callback_data:ms+'2ГоловинскийS'+nr}],[{text:os[6]+'Дмитровский',callback_data:ms+'2ДмитровскийS'+nr},{text:os[7]+'Западное Дегунино',callback_data:ms+'2Западное ДегуниноS'+nr}],[{text:os[8]+'Коптево',callback_data:ms+'2КоптевоS'+nr},{text:os[9]+'Левобережный',callback_data:ms+'2ЛевобережныйS'+nr}],[{text:os[10]+'Молжаниновский',callback_data:ms+'2МолжаниновскийS'+nr},{text:os[11]+'Савёловский',callback_data:ms+'2СавёловскийS'+nr}],[{text:os[12]+'Сокол',callback_data:ms+'2СоколS'+nr},{text:os[13]+'Тимирязевский',callback_data:ms+'2ТимирязевскийS'+nr}],[{text:os[14]+'Ховрино',callback_data:ms+'2ХовриноS'+nr},{text:os[15]+'Хорошёвский',callback_data:ms+'2ХорошёвскийS'+nr}],[{text:'⬅ Назад',callback_data:ms+'1Назад'}]]};
