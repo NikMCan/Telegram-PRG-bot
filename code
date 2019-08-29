@@ -399,7 +399,7 @@ function  doPost(e) {
       else log(update.message.chat.id, update.message.chat.first_name + '  ' + update.message.chat.last_name, name, rowMembers,update.message.text, update.message);
    
     if(mesText == '/start' && status!=0) sendmes(1,text0,key2,update.message.chat.id);
-    if(mesText == '/start' && status==0) sendmes(1,'Работа на выборах в районе Солнцево (ЗАО)',key2,update.message.chat.id);
+    if(mesText == '/start' && status==0) sendmes(1,text1,key2,update.message.chat.id);
     if(mesText == 'О Удалить') sheetDoki.getRange(rowMembers, 1, 1, 10).clear();
     if(mesText == 'Г Удалить') sheetDoki.getRange(rowMembers, 11, 1, 10).clear();
     if(mesText == 'П Удалить') sheetDoki.getRange(rowMembers, 21, 1, 10).clear();
