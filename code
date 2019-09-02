@@ -261,7 +261,7 @@ function  doPost(e) {
       if(cbText.slice(2,3) == '4') answercb('В этом столбце указывается, утвержденный комиссией, ведомственный коэффициент (не более 3х). Нажимайте и редактируйте, используя всплывающую клавиатуру.',cbId);
       if(cbText.slice(2,3) == '5') answercb('В этом столбце выводится рассчитанное вознаграждение. При нажатии - подробности расчета. ',cbId);
       }
-    if(cbText.slice(1,2) == 'a') answercb( 'Вознаграждение, итоговая сумма\n('+sheetUIK.getRange(1*cbText.slice(2),21).getValue() + '*' + sheetUIK.getRange(1*cbText.slice(2)-1,20).getValue() + '+2*' + sheetUIK.getRange(1*cbText.slice(2)-1,22).getValue() + '*' + sheetUIK.getRange(1*cbText.slice(2)-1,20).getValue()+')*(1+'+sheetUIK.getRange(1*cbText.slice(2)-1,24).getValue()+')='+sheetUIK.getRange(1*cbText.slice(2)-1,25).getValue()+'р',cbId); //столбец зарплаты
+    if(cbText.slice(1,2) == 'a') answercb( 'Вознаграждение, итоговая сумма\n('+sheetUIK.getRange(1*cbText.slice(2)-1,21).getValue() + '*' + sheetUIK.getRange(1*cbText.slice(2)-1,20).getValue() + '+2*' + sheetUIK.getRange(1*cbText.slice(2)-1,22).getValue() + '*' + sheetUIK.getRange(1*cbText.slice(2)-1,20).getValue()+')*(1+'+sheetUIK.getRange(1*cbText.slice(2)-1,24).getValue()+')='+sheetUIK.getRange(1*cbText.slice(2)-1,25).getValue()+'р',cbId); //столбец зарплаты
     if(cbText.slice(1,2) == 'u') zp(0,0,1*cbText.slice(2)); 
     if(cbText.slice(1,2) == 'r'){      
       if(cbText.slice(2,3) == '0') answercb('Расчетные часы председателя. Будни + 2*Выходные.',cbId);
