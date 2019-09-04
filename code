@@ -55,7 +55,8 @@ function  doPost(e) {
  
   //status = sheetMembers.getRange(rowMembers,1).getValue(); //можно настроить разный уровень доступа и меню для разных категорий пользователей
   
-  name = sheetMembers.getRange(rowMembers,3).getValue();
+  if( status==0) name  = 'Гость';
+    else name = sheetMembers.getRange(rowMembers,3).getValue();
   var text0 = 'Здравствуйте, ' + name.slice(name.indexOf(' ')+1) + '! Выберите интересующий вас раздел.';
   var text1 = 'Мы вернулись в начальное меню. Выберите интересующий вас раздел.';
   if(status==0) text1 = 'Работа на выборах в районе Солнцево (ЗАО)';
