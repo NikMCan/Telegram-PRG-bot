@@ -3,7 +3,8 @@
 
 var API_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 var ss = SpreadsheetApp.openById("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-var u = [9,69,137]; //здесь задаем номера строк - начал блоков и конец+1
+//var u = [9,69,137]; //здесь задаем номера строк - начал блоков и конец+1 для Расстановка, Документы и Весь район
+//var u1 = [9,69,137]; //для меню результат
 
 var sheetLog = ss.getSheetByName('Лог');
 var sheetMembers = ss.getSheetByName('Члены19');
@@ -16,19 +17,15 @@ var sheetTov = ss.getSheetByName('Товарищи');
 //var sheetDon1 = dd.getSheetByName('Лист1');
 //var sheetDon2 = dd.getSheetByName('Лист2');
 var sheetDoki = ss.getSheetByName('Доки');
-var vv = ['','','','','','','','','','','','','']; var sheetVideo = ['','','','','','','','','','','','',''];
-vv[4] = SpreadsheetApp.openById("1J243fPjYb9eJ9R5dktQ2-zihhdUJ1YEBQNyPZpnEEhw");
-vv[6] = SpreadsheetApp.openById("1Net2E83XdpacDMrCZHg9Rw8RwIjw_fI8jbgngWdGx48");
-vv[7] = SpreadsheetApp.openById("1WHaUFpZ50erJoZ7KO2b_sKBEoaI9EM8M8A8Esligbo8");
-vv[11] = SpreadsheetApp.openById("1OsnKspNgij4GWMZWHue3o5NeoHEEXttQM8Mt3Qtyhic");
-vv[12] = SpreadsheetApp.openById("1hE1TUBnLVSVqnzbia9PQWkCXBGtEmzMzPfZ9YuaFkbA");
 
-sheetVideo[4] = [vv[4].getSheetByName('Внуково'),vv[4].getSheetByName('Дорогомилово'),vv[4].getSheetByName('Крылатское'),vv[4].getSheetByName('Кунцево'),vv[4].getSheetByName('Можайский'),vv[4].getSheetByName('Ново-Переделкино'),vv[4].getSheetByName('Очаково-Матвеевское'),vv[4].getSheetByName('Проспект Вернадского'),vv[4].getSheetByName('Раменки'),vv[4].getSheetByName('Солнцево'),vv[4].getSheetByName('Тропарёво-Никулино'),vv[4].getSheetByName('Филёвский Парк'),vv[4].getSheetByName('Фили-Давыдково')]; //ЗАО
-sheetVideo[6] = [vv[6].getSheetByName('Богородское'),vv[6].getSheetByName('Вешняки'),vv[6].getSheetByName('Восточное Измайлово'),vv[6].getSheetByName('Восточный'),vv[6].getSheetByName('Гольяново'),vv[6].getSheetByName('Ивановское'),vv[6].getSheetByName('Измайлово'),vv[6].getSheetByName('Косино-Ухтомский'),vv[6].getSheetByName('Метрогородок'),vv[6].getSheetByName('Новогиреево'),vv[6].getSheetByName('Новокосино'),vv[6].getSheetByName('Перово'),vv[6].getSheetByName('Преображенское'),vv[6].getSheetByName('Северное Измайлово'),vv[6].getSheetByName('Соколиная гора'),vv[6].getSheetByName('Сокольники')];
+var vv = SpreadsheetApp.openById("1ugWUz8sl_aN1UNYyat6YzZy_VnrA2MQnWUiiDucVUtA");
+var sheetVideo = vv.getSheetByName('Лист1');
 
-sheetVideo[7] = [vv[7].getSheetByName('Академический'),vv[7].getSheetByName('Гагаринский'),vv[7].getSheetByName('Зюзино'),vv[7].getSheetByName('Коньково'),vv[7].getSheetByName('Котловка'),vv[7].getSheetByName('Ломоносовский'),vv[7].getSheetByName('Обручевский'),vv[7].getSheetByName('Северное Бутово'),vv[7].getSheetByName('Тёплый Стан'),vv[7].getSheetByName('Черёмушки'),vv[7].getSheetByName('Южное Бутово'),vv[7].getSheetByName('Ясенево')]; //ЮЗАО
-sheetVideo[11] = [vv[11].getSheetByName('Новомосковский'),vv[11].getSheetByName('Сосенский')];
-sheetVideo[12] = [vv[12].getSheetByName('Троицкий')];
+var u = [9,81,153,225,297];
+var u1 = [9,65,129,193,257,321]; 
+var summUIK = sheetMembers.getRange(1,4).getValue(); 
+for(i=0; i<5; i++) {if(u[i]>summUIK){u[i]=summUIK; u.length=i+1; break;}};
+for(i=0; i<6; i++) {if(u1[i]>summUIK){u1[i]=summUIK; u1.length=i+1; break;}}
                   
 var cbText = 0;
 var fromId = 0;
@@ -47,7 +44,6 @@ var formattedTime = Date.now()/86400000 + 25569 + 3/24;//dateTime.toISOString();
 var msTime = Date.now();
 var key5,key9,key16,key163,key17,key18,key19,key20,key21,key22,key23,key24,key25,key26,key27,key28;
 var text5,text16,text169,text17,text18,text19,text20,text21,text22,text23,text24,text25,text26,text27,text28;
-
 var update = '';
 
 function  doPost(e) { 
@@ -64,8 +60,8 @@ function  doPost(e) {
   var text1 = 'Мы вернулись в начальное меню. Выберите интересующий вас раздел.';
   if(status==0) text1 = 'Работа на выборах в районе Солнцево (ЗАО)';
 
-  var key2 = {inline_keyboard:[[{text:'🏆 Мой Вклад',callback_data:'0Вклад каждого'},{text:'⛳ Наша расстановка',callback_data:'1Расстановка'}],[{text:'🔮 Всевидящее Око!',callback_data:'9Всевидящее Око!'}],[{text:'🧬 Общий канал',url:'https://t.me/joinchat/AAAAAFWF-8zBZLvop_Mwig'},{text:'📲 Выборы',callback_data:'2Загрузка'}],[{text:'🍺 Наш чат',url:'https://t.me/xxxxxxxxxxxxxxxxx'},{text:'📣 Наш канал',url:'https://t.me/xxxxxxxxxxxxxxxxxxxxxxxxx'}],[{text:'🛰 Районы - товарищи',callback_data:'3Районы - товарищи1'}],[{text:'📚 Библиотека',callback_data:'4Библиотека'},{text:'💡 О боте',url:'https://telegra.ph/BOT---nu-a-zachem-ehto-06-27'}],[{text:'💳 Калькулятор вознаграждения',callback_data:'zПосчитать з/п'}]]}; //корневое меню админа
-  var key1 = {inline_keyboard:[[{text:'🏆 Мой Вклад',callback_data:'0Вклад каждого'},{text:'⛳ Наша расстановка',callback_data:'1Расстановка'}],[{text:'🔮 Всевидящее Око!',callback_data:'9Всевидящее Око!'}],[{text:'🧬 Общий канал',url:'https://t.me/joinchat/AAAAAFWF-8zBZLvop_Mwig'},{text:'📲 Выборы',callback_data:'2Загрузка'}],[{text:'🍺 Наш чат',url:'https://t.me/xxxxxxxxxxxxxxxxxxx'},{text:'📣 Наш канал',url:'https://t.me/xxxxxxxxxxxxxxxxxxxxxxxx'}],[{text:'🛰 Районы - товарищи',callback_data:'3Районы - товарищи1'}],[{text:'📚 Библиотека',callback_data:'4Библиотека'},{text:'🍱 Составы',url:'https://t.me/UIK_MSK_BOT'}],[{text:'💳 Калькулятор вознаграждения',callback_data:'zПосчитать з/п'}]]}; //корневое меню админа 
+  var key2 = {inline_keyboard:[[{text:'🏆 Мой Вклад',callback_data:'0Вклад каждого'},{text:'⛳ Наша расстановка',callback_data:'1Расстановка'}],[{text:'🔮 Всевидящее Око!',callback_data:'9Всевидящее Око!'}],[{text:'🧬 Общий канал',url:'https://t.me/joinchat/AAAAAFWF-8zBZLvop_Mwig'},{text:'📲 Выборы',callback_data:'2Загрузка'}],[{text:'🍺 Наш чат',url:'https://t.me/joinchat/F8YTvUvZy8nN5--SRr9_RQ'},{text:'📣 Наш канал',url:'https://t.me/joinchat/AAAAAEWQ3XakTiCQB_O3eg'}],[{text:'🛰 Районы - товарищи',callback_data:'3Районы - товарищи1'}],[{text:'📚 Библиотека',callback_data:'4Библиотека'},{text:'💡 О боте',url:'https://telegra.ph/BOT---nu-a-zachem-ehto-06-27'}],[{text:'💳 Калькулятор вознаграждения',callback_data:'zПосчитать з/п'}]]}; //корневое меню админа
+  var key1 = {inline_keyboard:[[{text:'🏆 Мой Вклад',callback_data:'0Вклад каждого'},{text:'⛳ Наша расстановка',callback_data:'1Расстановка'}],[{text:'🔮 Всевидящее Око!',callback_data:'9Всевидящее Око!'}],[{text:'🧬 Общий канал',url:'https://t.me/joinchat/AAAAAFWF-8zBZLvop_Mwig'},{text:'📲 Выборы',callback_data:'2Загрузка'}],[{text:'🍺 Наш чат',url:'https://t.me/joinchat/F8YTvUvZy8nN5--SRr9_RQ'},{text:'📣 Наш канал',url:'https://t.me/joinchat/AAAAAEWQ3XakTiCQB_O3eg'}],[{text:'🛰 Районы - товарищи',callback_data:'3Районы - товарищи1'}],[{text:'📚 Библиотека',callback_data:'4Библиотека'},{text:'🍱 Составы',url:'https://t.me/UIK_MSK_BOT'}],[{text:'💳 Калькулятор вознаграждения',callback_data:'zПосчитать з/п'}]]}; //корневое меню админа 
   if(status==0) key1 = {inline_keyboard:[[{text:'🎸 О нас',url:'https://telegra.ph/BOT---nu-a-zachem-ehto-06-27'}],[{text:'⛳ Расстановка',callback_data:'1Расстановка'},{text:'💳 Финансы',callback_data:'zВесь район'}],[{text:'📀 Фото, документы',callback_data:'2Документы'},{text:'🧫 Результаты',callback_data:'2Результаты'}]]}; key2=key1;
   var key3 = {inline_keyboard:[[{text:'📀 Фото, документы',callback_data:'2Документы'}],[{text:'✏ Ввести цифры',callback_data:'2Ввести цифры'},{text:'🧫 Результаты',callback_data:'2Результаты'}],[{text:'⬅ Назад',callback_data:'2Назад'}]]}; //подменю Загрузка {text:'📸 Ввести QR-код',callback_data:'2Ввести QR-код'},
   var key6 = {inline_keyboard:[[{text:'📚 Рабочие блокноты УИК',callback_data:'4Рабочие блокноты УИК'}],[{text:'📖 ИКМ',callback_data:'4ИКМ'},{text:'📖 ФЗГ',callback_data:'4ФЗГ'}],[{text:'🦉 Наблавики',url:'https://www.nablawiki.ru/index.php/%D0%A1%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA_%D0%BD%D0%B0%D0%B1%D0%BB%D1%8E%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8F'},{text:'📱 Голос софт',url:'https://play.google.com/store/apps/details?id=com.golos&hl=ru'}],[{text:'⬅ Назад',callback_data:'4Назад'}]]}; //http://telegra.ph/Dengi-komissij-07-04-3
@@ -142,35 +138,31 @@ function  doPost(e) {
     
   }
   
-  if(cbText.slice(0,1) == '9'){ //
+  if(cbText.slice(0,1) == '9'){ // Всевидящее Око
    if(cbText.slice(1,2) == '1' && cbText!='91Назад') cbText='9'+cbText.slice(1+cbText.indexOf('д')); //такой вот возврат из меню района в меню округа 
     switch (cbText){
-      case '9Всевидящее Око!':  rn(9,0); newmessage(1,text16,key9,fromId,messageId); break;
+      case '9Всевидящее Око!':  rn(9,0); newmessage(1,text169,key9,fromId,messageId); break;
       case '9Назад': newmessage(1,text1,key1,fromId,messageId); break;
-      case '91Назад': rn(9,0); newmessage(1,text16,key16,fromId,messageId); break;
-      case '9СЗАО': rn(9,1); newmessage(1,text17,key17,fromId,messageId); break;
-      case '9САО': rn(9,2); newmessage(1,text18,key18,fromId,messageId); break;
-      case '9СВАО': rn(9,3); newmessage(1,text19,key19,fromId,messageId); break;
-      case '9ЗАО': rn(9,4); newmessage(1,text20,key20,fromId,messageId); break;
-      case '9ЦАО': rn(9,5); newmessage(1,text21,key21,fromId,messageId); break;
-      case '9ВАО': rn(9,6); newmessage(1,text22,key22,fromId,messageId); break;
-      case '9ЮЗАО': rn(9,7); newmessage(1,text23,key23,fromId,messageId); break;
-      case '9ЮАО': rn(9,8); newmessage(1,text24,key24,fromId,messageId); break;
-      case '9ЮВАО': rn(9,9); newmessage(1,text25,key25,fromId,messageId); break;
-      case '9ЗелАО': rn(9,10); newmessage(1,text26,key26,fromId,messageId); break;
-      case '9НАО': rn(9,11); newmessage(1,text27,key27,fromId,messageId); break;
-      case '9ТАО': rn(9,12); newmessage(1,text28,key28,fromId,messageId); break;
+      case '91Назад': rn(9,0); newmessage(1,text169,key16,fromId,messageId); break;
+      case '9СЗАО': rn(9,1); newmessage(1,text17,key169,fromId,messageId); break;
+      case '9САО': rn(9,2); newmessage(1,text18,key169,fromId,messageId); break;
+      case '9СВАО': rn(9,3); newmessage(1,text19,key169,fromId,messageId); break;
+      case '9ЗАО': rn(9,4); newmessage(1,text20,key169,fromId,messageId); break;
+      case '9ЦАО': rn(9,5); newmessage(1,text21,key169,fromId,messageId); break;
+      case '9ВАО': rn(9,6); newmessage(1,text22,key169,fromId,messageId); break;
+      case '9ЮЗАО': rn(9,7); newmessage(1,text23,key169,fromId,messageId); break;
+      case '9ЮАО': rn(9,8); newmessage(1,text24,key169,fromId,messageId); break;
+      case '9ЮВАО': rn(9,9); newmessage(1,text25,key169,fromId,messageId); break;
+      case '9ЗелАО': rn(9,10); newmessage(1,text26,key169,fromId,messageId); break;
+      case '9НАО': rn(9,11); newmessage(1,text27,key169,fromId,messageId); break;
+      case '9ТАО': rn(9,12); newmessage(1,text28,key169,fromId,messageId); break;
     }
-    if(cbText.slice(1,2) == '2'){ //выводим таблицу уиков
-      for (var i=0; i<20; i++) {if(cbText.slice(2,cbText.indexOf('S'))==sheetVideo[1*cbText.slice(1+cbText.indexOf('S'))][i].getName()) {var raion = i; break;}}
-      //sheetMembers.getRange(1,1).setValue(sheetVideo[1*cbText.slice(1+cbText.indexOf('S'))][raion].getRange(2,1).getValue());
-      video(1*cbText.slice(1+cbText.indexOf('S')),raion);
-    }
+    if(cbText.slice(1,2) == '2') video(1*cbText.slice(1+cbText.indexOf('S')),1*cbText.slice(2,cbText.indexOf('S'))); //выводим таблицу уиков     
     if(cbText.slice(1,2) == '3'){ //выводим видео и протокол
-      var text = 'Видео'; 
+      var text = 'Видео УИК №'+ sheetVideo.getRange(cbText.slice(2),6).getValue(); 
       var sci = ['▶️','▶','⏩','⏩'];
-      var But = [[{text:'📝 Info',url:'https://telegra.ph/Voznagrazhdenie---analiz-08-12'},{text:'❎ Удалить УИК.',callback_data:'94'}]];
-      for(var i=0; i<4; i++) {var sska= sheetVideo[1*cbText.slice(2,cbText.indexOf('R'))][1*cbText.slice(1+1*cbText.indexOf('R'),1*cbText.indexOf('U'))].getRange(cbText.slice(1+1*cbText.indexOf('U')),3+i).getValue();
+      var But = [[{text:'📝 Info',url:'https://telegra.ph/Voznagrazhdenie---analiz-08-12'},{text:'🔍 Подсчет',callback_data:'96'+cbText.slice(2)},{text:'❎ Удалить УИК.',callback_data:'94'}]];
+      for(var i=0; i<4; i++) {var sska= sheetVideo.getRange(cbText.slice(2),8+i).getValue();
         if(i==0 || i==2) {if(sska!=0) {But.push([{text:sci[i]+' Камера 1',url:sska}]);} else {But.push([{text:'🕳 Нет',callback_data:95}]);}}
           else  {if(sska!=0) {But[But.length-1].push({text:sci[i]+' Камера 2',url:sska});} else {But[But.length-1].push({text:'🕳 Нет',callback_data:95});}}
       }
@@ -182,6 +174,7 @@ function  doPost(e) {
   }
   
   if(cbText.slice(0,1) == '3'){ //Районы товарищи
+    //rn(3,-1);
     switch (cbText){
       case '3Районы - товарищи1': rn(3,0); newmessage(1,text16,key16,fromId,messageId); break;
       case '3Назад': newmessage(1,text1,key1,fromId,messageId); break;
@@ -494,7 +487,7 @@ function log(Id,fullName,name,rowMembers,text,msg){ //функция запис�
     sheetLogError.getRange(rowLogError+1,2).setValue(Id);
     sheetLogError.getRange(rowLogError+1,3).setValue(fullName);
     sheetLogError.getRange(rowLogError+1,4).setValue(text);
-    sheetLogError.getRange(rowLogError+1,6).setValue(msg);        
+    //sheetLogError.getRange(rowLogError+1,6).setValue(msg);        
     }
     else { //В лог опознанных
       //sheetLog.getRange(rowLog+1,6).setValue(msg);
@@ -656,6 +649,19 @@ function rn(ms,nr){ //единый модуль для краудфандига,
         else tBut[tBut.length-1].push({text:'⬅ Назад',callback_data:ms+'1Назад'});
       key163 = {inline_keyboard:tBut};
     }}
+  if(ms==9){ //Всевидящее Око    
+    if(nr==0) {for(var i=0; i<12; i++) ts[i]=sheetVideo.getRange(i+2,5).getValue();}
+       else if(nr>0){ 
+         var rowEnd = sheetVideo.getRange(nr+1,6).getValue(); var tBut=[]; var trig=0; 
+         for(var i=0; i<rowEnd; i++) {
+          if(trig==0) {tBut.push([{text:sheetVideo.getRange(i+2,10+4*nr).getValue() +" "+ sheetVideo.getRange(i+1,7+4*nr).getValue(),callback_data: ms+"2"+i+"S"+nr}]); trig=1;}
+            else {tBut[tBut.length-1].push({text:sheetVideo.getRange(i+2,10+4*nr).getValue() +" "+ sheetVideo.getRange(i+1,7+4*nr).getValue(),callback_data: ms+"2"+i+"S"+nr}); trig=0;}
+      }
+      if(trig==0) tBut.push([{text:'⬅ Назад',callback_data:ms+'1Назад'}]);
+        else tBut[tBut.length-1].push({text:'⬅ Назад',callback_data:ms+'1Назад'});
+      key169 = {inline_keyboard:tBut};                     
+       }
+  }
   
   //text5 = 'Коллеги, понятно, что не все в этой жизни можно сделать бесплатно. И в этом разделе мы предлагаем вашему вниманию, очень достойный, но затратный проект в области контроля выборов.\nСобрано ' + sheetDon1.getRange(1,7).getValue() + 'р на 3519 комиссий';
   text16 = "Округа Москвы. Значком 🍻 отмечены округа, в которых есть районы, также развернувшие личный кабинет члена комиссии.";
@@ -673,7 +679,7 @@ function rn(ms,nr){ //единый модуль для краудфандига,
   text27 = "Новомосковский АО Москвы"+ts[10];
   text28 = "Троицкий АО Москвы"+ts[11];
   
-  key9 = {inline_keyboard:[[{text:'💳 Поддержать',url:'https://schitaytesami.live/#/donate'}],[{text:'СЗАО',callback_data:ms+'СЗАО'},{text:'САО',callback_data:ms+'САО'},{text:'СВАО',callback_data:ms+'СВАО'}],[{text:'ЗАО',callback_data:ms+'ЗАО'},{text:'ЦАО',callback_data:ms+'ЦАО'},{text:'ВАО',callback_data:ms+'ВАО'}],[{text:'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:'ЮАО',callback_data:ms+'ЮАО'},{text:'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:'ЗелАО',callback_data:ms+'ЗелАО'},{text:'НАО',callback_data:ms+'НАО'},{text:'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
+  key9 = {inline_keyboard:[[{text:'💳 Поддержать',url:'https://schitaytesami.live/#/donate'}],[{text:ts[0]+'СЗАО',callback_data:ms+'СЗАО'},{text:ts[1]+'САО',callback_data:ms+'САО'},{text:ts[2]+'СВАО',callback_data:ms+'СВАО'}],[{text:ts[3]+'ЗАО',callback_data:ms+'ЗАО'},{text:ts[4]+'ЦАО',callback_data:ms+'ЦАО'},{text:ts[5]+'ВАО',callback_data:ms+'ВАО'}],[{text:ts[6]+'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:ts[7]+'ЮАО',callback_data:ms+'ЮАО'},{text:ts[8]+'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:ts[9]+'ЗелАО',callback_data:ms+'ЗелАО'},{text:ts[10]+'НАО',callback_data:ms+'НАО'},{text:ts[11]+'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
   key16 = {inline_keyboard:[[{text:ts[0]+'СЗАО',callback_data:ms+'СЗАО'},{text:ts[1]+'САО',callback_data:ms+'САО'},{text:ts[2]+'СВАО',callback_data:ms+'СВАО'}],[{text:ts[3]+'ЗАО',callback_data:ms+'ЗАО'},{text:ts[4]+'ЦАО',callback_data:ms+'ЦАО'},{text:ts[5]+'ВАО',callback_data:ms+'ВАО'}],[{text:ts[6]+'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:ts[7]+'ЮАО',callback_data:ms+'ЮАО'},{text:ts[8]+'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:ts[9]+'ЗелАО',callback_data:ms+'ЗелАО'},{text:ts[10]+'НАО',callback_data:ms+'НАО'},{text:ts[11]+'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
   key5 = {inline_keyboard:[[{text:'📝 Info',url:'https://telegra.ph/Muzyka-08-15'},{text:'🔮 "Видео 2018"',url:'https://schitaytesami.live/#/donate'}],[{text:os[0]+'СЗАО',callback_data:ms+'СЗАО'},{text:os[1]+'САО',callback_data:ms+'САО'},{text:os[2]+'СВАО',callback_data:ms+'СВАО'}],[{text:os[3]+'ЗАО',callback_data:ms+'ЗАО'},{text:os[4]+'ЦАО',callback_data:ms+'ЦАО'},{text:os[5]+'ВАО',callback_data:ms+'ВАО'}],[{text:os[6]+'ЮЗАО',callback_data:ms+'ЮЗАО'},{text:os[7]+'ЮАО',callback_data:ms+'ЮАО'},{text:os[8]+'ЮВАО',callback_data:ms+'ЮВАО'}],[{text:os[9]+'ЗелАО',callback_data:ms+'ЗелАО'},{text:os[10]+'НАО',callback_data:ms+'НАО'},{text:os[11]+'ТАО',callback_data:ms+'ТАО'}],[{text:'⬅ Назад',callback_data:ms+'Назад'}]]};
   key17 = {inline_keyboard:[[{text:os[0]+'Куркино',callback_data:ms+'2КуркиноS'+nr},{text:os[1]+'Митино',callback_data:ms+'2МитиноS'+nr}],[{text:os[2]+'Покровское-Стрешнево',callback_data:ms+'2Покровское-СтрешневоS'+nr},{text:os[3]+'Северное Тушино',callback_data:ms+'2Северное ТушиноS'+nr}],[{text:os[4]+'Строгино',callback_data:ms+'2СтрогиноS'+nr},{text:os[5]+'Хорошёво-Мнёвники',callback_data:ms+'2Хорошёво-МнёвникиS'+nr}],[{text:os[6]+'Щукино',callback_data:ms+'2ЩукиноS'+nr},{text:os[7]+'Южное Тушино',callback_data:ms+'2Южное ТушиноS'+nr}],[{text:'⬅ Назад',callback_data:ms+'1Назад'}]]};
@@ -700,7 +706,7 @@ var sort = ['','','','','','','']; //массив для значка сорти
 if(mcb[6]=='1') sort[mcb[6]] = '🔺'; //Сортировка по номерам уиков - по возрастанию, остальные - по убыванию
   else sort[mcb[6]] = '🔻';
 var uik = []; //массив с количеством комиссий в каждом посте. Помним макимум возможно 100 кнопок на пост
-for (var i=0; i<u.length-1; i++) uik.push((u[i+1]-u[i])/4);
+for (var i=0; i<u1.length-1; i++) uik.push((u1[i+1]-u1[i])/4);
 var sum = 0;
 var text = ['Таблица итогов голосования. Обновляется по мере поступления данных','Второй блок','Третий блок','Четвертый блок','Пятый блок','Выберите столбец, что будет выведен в таблицу результатов голосования.']; 
 if(nStr<1){ var But = [[{text:'📝 Info',url:'https://telegra.ph/Itogi-vyborov-08-14'}],[{text:'⬅ Назад',callback_data:'21Назад'}]];
@@ -856,15 +862,17 @@ function vraion(){ //Весь район в меню расчета вознаг
   }
 }
 
-function video(okr, raion){
+function video(okr, raion){  
 var text = 'Оценка работы комиссии при подсчете\n🥇 - идеально, по закону и в соответствии с рабочим блокнотом\n🥈 - по закону\n🥉 - одно нарушение закона, см 📝 Info\n💀 - множественные нарушения закона';
 var o =[0,'СЗАО','САО','СВАО','ЗАО','ЦАО','ВАО','ЮЗАО','ЮАО','ЮВАО','ЗелАО','НАО','ТАО'];
 var vdBut = [[{text:'📝 Info',url:'https://telegra.ph/Voznagrazhdenie---analiz-08-12'}],[{text:'⬅ Назад',callback_data:'91Назад'+o[okr]}]];  
-var rowUik = 4; var uik = sheetVideo[okr][raion].getRange(rowUik,1).getValue();
-while(uik!=0){
-  vdBut.push([{text:sheetVideo[okr][raion].getRange(rowUik,15).getValue(),callback_data:'93'+okr+'R'+raion+'U'+rowUik}]); rowUik = rowUik +1;
-  for(var i=0; i<2; i++) {if(uik!=0) {vdBut[vdBut.length-1].push({text:sheetVideo[okr][raion].getRange(rowUik,15).getValue(),callback_data:'93'+okr+'R'+raion+'U'+rowUik}); rowUik = rowUik +1; uik = sheetVideo[okr][raion].getRange(rowUik,1).getValue();}}
+var rowStart = sheetVideo.getRange(raion+1, 8+okr*4).getValue(); var rowEnd = sheetVideo.getRange(raion+1, 9+okr*4).getValue(); var trig = 0;
+for(var i=rowStart; i<rowEnd+1; i++){
+  if(trig==0) {vdBut.push([{text:sheetVideo.getRange(i,7).getValue(),callback_data:'93'+i}]); trig=trig+1;}
+    else if(trig==1) {vdBut[vdBut.length-1].push({text:sheetVideo.getRange(i,7).getValue(),callback_data:'93'+i}); trig=trig+1;} 
+    else if(trig==2) {vdBut[vdBut.length-1].push({text:sheetVideo.getRange(i,7).getValue(),callback_data:'93'+i}); trig=0;}
 }
+
 var key = {inline_keyboard:vdBut};  
 newmessage(1,text,key,fromId,messageId);  
 }
