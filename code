@@ -107,9 +107,9 @@ function  doPost(e) {
                      sendmes(1,text1,key1,fromId); break;}
     case '2Загрузка': newmessage(1,text3,key3,fromId,messageId); break;    
     case '2Назад': newmessage(1,text1,key1,fromId,messageId); break;
-    case '21Назад': {for (var i=0; i<u.length-1; i++) delmes(fromId,messageId+i); //возврат в Выборы из Результат (удаляем два поста и шлем новый, обнуляем столбец обновлений)
+    case '21Назад': {for (var i=0; i<u1.length-1; i++) delmes(fromId,messageId+i); //возврат в Выборы из Результат (удаляем два поста и шлем новый, обнуляем столбец обновлений)
                      if(status==0){sendmes(1,text1,key1,fromId);} else {sendmes(1,text3,key3,fromId); sheetMembers.getRange(rowMembers,28).setValue(0);} break;}
-    case '211Назад': {for (var i=0; i<u.length-1; i++) delmes(fromId,messageId-i); //возврат в Выборы из Результат (удаляем два поста и шлем новый, обнуляем столбец обновлений)
+    case '211Назад': {for (var i=0; i<u1.length-1; i++) delmes(fromId,messageId-i); //возврат в Выборы из Результат (удаляем два поста и шлем новый, обнуляем столбец обновлений)
                       if(status==0){sendmes(1,text1,key1,fromId);} else {sendmes(1,text3,key3,fromId); sheetMembers.getRange(rowMembers,28).setValue(0);} break;}
     case '22Назад': {for (var i=0; i<u.length-1; i++) delmes(fromId,messageId+i); //возврат в Выборы из Документы (удаляем два поста и шлем новый)
                      if(status==0){sendmes(1,text1,key1,fromId);} else {sendmes(1,text3,key3,fromId);} break;}
