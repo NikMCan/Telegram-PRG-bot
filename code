@@ -404,10 +404,10 @@ function  doPost(e) {
          var rowZ = sheetRez.getRange(1,2).getValue();
          var v = mesText.split(',');
       if(v.length-2+1*mesText.slice(1,mesText.indexOf(','))<19) {
-      for(i=1; i<v.length; i++) {        
-          sheetRez.getRange(rowZ,i+2+1*mesText.slice(1,mesText.indexOf(','))).setValue(1*v[i]);      
-          delmes(fromId,messageId);
-        sheetRez.getRange(rowZ,1).setValue(formattedTime);}}
+      for(i=1; i<v.length; i++) {
+          sheetRez.getRange(rowZ,i+2+1*mesText.slice(1,mesText.indexOf(','))).setValue(1*v[i]);}                
+        sheetRez.getRange(rowZ,1).setValue(formattedTime);
+        delmes(fromId,messageId);}
         else sendmes(1,'Ошибка в количестве вводимых значений',key8,fromId);      
     }
     
