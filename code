@@ -399,11 +399,11 @@ function  doPost(e) {
     if(mesText == 'П Удалить') sheetDoki.getRange(rowMembers, 21, 1, 10).clear();
     if(mesText == 'Ф Удалить') sheetDoki.getRange(rowMembers, 31, 1, 10).clear();
     
-    if(mesText.slice(0,1)=='V' && 1*mesText.slice(1,2)>0 && 1*mesText.slice(1,mesText.indexOf(','))<19 ) { //обрабатываем ввод результатов голосования 19 это число строк плюс один - меняйте в двух местах
+    if(mesText.slice(0,1)=='V' && 1*mesText.slice(1,2)>0 ) { //обрабатываем ввод результатов голосования 19 это число строк плюс один - меняйте в двух местах
          sheetRez.getRange(1,1).setValue(sheetMembers.getRange(rowMembers,4).getValue());
          var rowZ = sheetRez.getRange(1,2).getValue();
          var v = mesText.split(',');
-      if(v.length-2+1*mesText.slice(1,mesText.indexOf(','))<19) {
+      if(v.length-2+1*mesText.slice(1,mesText.indexOf(','))<24) {
       for(i=1; i<v.length; i++) {
           sheetRez.getRange(rowZ,i+2+1*mesText.slice(1,mesText.indexOf(','))).setValue(1*v[i]);}                
         sheetRez.getRange(rowZ,1).setValue(formattedTime);
