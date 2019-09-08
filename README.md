@@ -2,4 +2,4 @@
 Телеграм бот, реализованный, как скрипт гугл таблицы для работы прг района.
 Ссылка на экселевский файл. Его надо загрузить на гугл диск и импортировать в гугл таблицу. 
 Создать скрипт и вставить туда код. Зарегистрировать бот. 
-https://drive.google.com/file/d/12XuIz8QbddU9-rqXBxL--Izj5Lgcp_Oe/view?usp=sharing
+https://drive.google.com/file/d/196j3cixJcXyQ1oSaQUyLCntGbz8AC1oh/view?usp=sharing
